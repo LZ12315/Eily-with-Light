@@ -5,15 +5,17 @@ using UnityEngine;
 public class LightingBoid : MonoBehaviour
 {
     public Rigidbody2D rb;
+    public Collider2D trigger;
 
     [Header("基本属性")]
-    public GameObject parent;
+    public BoidParent parent;
     public float flySpeed;
+    private bool isActive = false;
     public Vector2 initialDirection;
     private Vector2 finalDirection;
+    [SerializeField] private List<LightingBoid> allBoids;
 
     [Header("视野属性")]
-    public List<LightingBoid> allBoids;
     public float visionRadius = 5.0f; // 视野半径
     public float visionAngle = 60.0f;  // 视场角度（度）
     private float visionConeThreshold; // 视场
@@ -48,7 +50,20 @@ public class LightingBoid : MonoBehaviour
 
     private void FixedUpdate()
     {
-        SteerActions();
+        if(isActive)
+            SteerActions();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (isActive)
+            return;
+        if(collision.GetComponent<BoidParent>() != null)
+        {
+            parent = collision.GetComponent<BoidParent>();
+            parent.GetBoid(this);
+            isActive = true;
+        }
     }
 
     private void SteerActions()
@@ -78,6 +93,8 @@ public class LightingBoid : MonoBehaviour
         allBoids = boidsList;
     }
 
+    #region 跟随逻辑
+
     private bool InVisionCone(Vector2 targetPosition)
     {
         Vector2 myDirection = initialDirection; // 这里假设物体的正上方是它的前方 之后会设定为跟随主角 需要修改
@@ -93,7 +110,10 @@ public class LightingBoid : MonoBehaviour
 
     private Vector2 ParentLock()
     {
-        return (parent.transform.position - transform.position).normalized;
+        if(parent != null)
+            return (parent.transform.position - transform.position).normalized;
+        else 
+            return transform.position;
     }
 
     private Vector2 SteerSeparation()
@@ -223,5 +243,7 @@ public class LightingBoid : MonoBehaviour
         // 恢复 Gizmo 原始颜色
         Gizmos.color = originalColor;
     }
+    #endregion
+
 }
 
