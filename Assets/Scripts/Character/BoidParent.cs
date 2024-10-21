@@ -12,4 +12,9 @@ public class BoidParent : MonoBehaviour
         foreach (var boid in boids)
             boid.UpdateBoidsList(boids);
     }
+
+    public void BoidAttack()
+    {
+
+    }
 }

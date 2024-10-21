@@ -99,48 +99,6 @@ ScriptedImporter:
     spritePosition: {x: 0, y: 0}
   mosaicSpriteImportData: []
   rigSpriteImportData:
-  - name: "\u56FE\u5C42 3"
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 3983
-      y: 6359
-      width: 0
-      height: 0
-    spriteID: 7e597dd0792134646a76c1519664e602
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 12, y: 5279}
-    spritePosition: {x: 3971, y: 1080}
-  - name: "\u56FE\u5C42 15"
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 3983
-      y: 6367
-      width: 0
-      height: 0
-    spriteID: 43413211c1ecdd442b3e154ab4c84491
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 12, y: 5287}
-    spritePosition: {x: 3971, y: 1080}
   - name: "\u524D"
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -366,7 +324,55 @@ ScriptedImporter:
     characterGroups: []
     pivot: {x: 0, y: 0}
     boneReadOnly: 0
-  platformSettings: []
+  platformSettings:
+  - name: DefaultTexturePlatform
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Standalone
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Server
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Android
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
   mosaicLayers: 1
   characterMode: 1
   documentPivot: {x: 0, y: 0}
@@ -393,7 +399,7 @@ ScriptedImporter:
     layerID: 12
     mosaicPosition: {x: 3983, y: 6359}
     flatten: 0
-    isImported: 1
+    isImported: 0
     isVisible: 1
   - name: "\u56FE\u5C42 15"
     spriteName: "\u56FE\u5C42 15"
@@ -403,7 +409,7 @@ ScriptedImporter:
     layerID: 11
     mosaicPosition: {x: 3983, y: 6367}
     flatten: 0
-    isImported: 1
+    isImported: 0
     isVisible: 1
   - name: "\u524D"
     spriteName: "\u524D"
@@ -506,7 +512,19 @@ ScriptedImporter:
     isImported: 1
     isVisible: 1
   sharedRigPSDLayers: []
-  pSDLayerImportSetting: []
+  pSDLayerImportSetting:
+  - spriteId: 7e597dd0792134646a76c1519664e602
+    name: "\u56FE\u5C42 3"
+    layerId: 12
+    flatten: 0
+    isGroup: 0
+    importLayer: 0
+  - spriteId: 43413211c1ecdd442b3e154ab4c84491
+    name: "\u56FE\u5C42 15"
+    layerId: 11
+    flatten: 0
+    isGroup: 0
+    importLayer: 0
   importFileNodeState: 1
   platformSettingsDirtyTick: 0
   spriteSizeExpandChanged: 0

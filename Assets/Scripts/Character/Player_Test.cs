@@ -22,10 +22,13 @@ public class Player_Test : MonoBehaviour
             direction = -1;
         else
             direction = 0;
+
     }
 
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(direction * speed, rb.velocity.y);
+        if(direction != 0)
+            transform.localScale = new Vector3(-direction, 1, 1);
     }
 }
