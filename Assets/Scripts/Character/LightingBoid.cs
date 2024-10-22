@@ -1,4 +1,4 @@
-using System.Collections;
+using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,11 +9,22 @@ public class LightingBoid : MonoBehaviour
 
     [Header("基本属性")]
     public BoidParent parent;
+    [SerializeField] private List<LightingBoid> allBoids;
     public float flySpeed;
-    private bool isActive = false;
+    [SerializeField] private LightingBoidStatues statues = LightingBoidStatues.Idle;
+
     public Vector2 initialDirection;
     private Vector2 finalDirection;
-    [SerializeField] private List<LightingBoid> allBoids;
+    private Tween doAnimate;
+
+    [Header("待机相关")]
+    public float cruiseRadius = 2f;
+    public float idleTime = 0.75f;
+    public float cruiseDuration = 1f;
+    private Vector3 center;
+    [SerializeField] private Vector3 cruisePosition;
+    private bool isCrusing = false;
+    private float idleCounter;
 
     [Header("视野属性")]
     public float visionRadius = 5.0f; // 视野半径
@@ -33,6 +44,14 @@ public class LightingBoid : MonoBehaviour
     public float avoidanceWeight = 1.5f;
     public float parentWeight = 1.0f;
 
+    [Header("攻击相关")]
+    public float cuvature = 1f;
+    public float percentSpeed = 0.00005f;
+    private Transform targetTransform;
+    private Vector3 originPoint;
+    private Vector3 controlPoint;
+    [SerializeField] private float percent;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -41,6 +60,7 @@ public class LightingBoid : MonoBehaviour
     private void Start()
     {
         visionConeThreshold = Mathf.Cos(visionAngle * 0.5f * Mathf.Deg2Rad);
+        SetStatuesIdle();
     }
 
     private void Update()
@@ -50,23 +70,103 @@ public class LightingBoid : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(isActive)
-            SteerActions();
+        switch (statues)
+        {
+            case LightingBoidStatues.Idle:
+                BoidIdle();
+                break;
+            case LightingBoidStatues.Follow:
+                BoidFollow();
+                break;
+            case LightingBoidStatues.Attack:
+                BoidAttack();
+                break;
+        }
+    }
+
+    public void SetParent(BoidParent parent)
+    {
+        this.parent = parent;
+        parent.GetBoid(this);
+        SetBoidStatues(parent, LightingBoidStatues.Follow);
+    }
+
+    public void UpdateBoidsList(List<LightingBoid> boidsList)
+    {
+        allBoids = boidsList;
+    }
+
+    public void SetBoidStatues(BoidParent parent, LightingBoidStatues newStaues)
+    {
+        if(doAnimate != null)
+            doAnimate.Kill();
+        statues = newStaues;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (isActive)
+        if (statues == LightingBoidStatues.Follow)
             return;
-        if(collision.GetComponent<BoidParent>() != null)
-        {
-            parent = collision.GetComponent<BoidParent>();
-            parent.GetBoid(this);
-            isActive = true;
-        }
+
+        if (collision.GetComponent<BoidParent>() != null)
+            SetParent(collision.GetComponent<BoidParent>());
     }
 
-    private void SteerActions()
+    public void AttackStart(Transform enemyTrans)
+    {
+        targetTransform = enemyTrans;
+        SetBoidStatues(parent, LightingBoidStatues.Attack);
+
+        originPoint = transform.position;
+        controlPoint = GetMiddlePosition(transform.position, targetTransform.position);
+    }
+
+    #region 待机逻辑
+
+    private void BoidIdle()
+    {
+        if(!isCrusing)
+        {
+            SetTargetPosition();
+            isCrusing = true;
+        }
+        else
+        {
+            if (VectorApproximate.Approximate(transform.position, cruisePosition))
+            {
+                idleCounter += Time.deltaTime;
+                if (idleCounter >= idleTime)
+                {
+                    isCrusing = false;
+                    idleCounter = 0;
+                }
+            }
+            else
+                doAnimate = transform.DOMove(cruisePosition, cruiseDuration);
+        }
+    }
+    private void SetTargetPosition()
+    {
+        float randomAngle = Random.Range(0f, 360f);
+
+        float x = center.x + cruiseRadius * Mathf.Cos(randomAngle * Mathf.Deg2Rad);
+        float y = center.y + cruiseRadius * Mathf.Sin(randomAngle * Mathf.Deg2Rad);
+
+        cruisePosition = new Vector2(x, y);
+    }
+
+    public void SetStatuesIdle()
+    {
+        statues = LightingBoidStatues.Idle;
+        center = transform.position;
+        isCrusing = false;
+    }
+
+    #endregion
+
+    #region 跟随逻辑
+
+    private void BoidFollow()
     {
         initialDirection = ParentLock();
         Vector2 separationDirection = SteerSeparation();
@@ -87,13 +187,6 @@ public class LightingBoid : MonoBehaviour
 
         rb.velocity = Vector2.Lerp(rb.velocity, finalDirection * flySpeed, Time.deltaTime);
     }
-
-    public void UpdateBoidsList(List<LightingBoid> boidsList)
-    {
-        allBoids = boidsList;
-    }
-
-    #region 跟随逻辑
 
     private bool InVisionCone(Vector2 targetPosition)
     {
@@ -217,32 +310,65 @@ public class LightingBoid : MonoBehaviour
         return avoidDirection.normalized;
     }
 
-    private void OnDrawGizmos()
+    //private void OnDrawGizmos()
+    //{
+    //    // 设置 Gizmo 颜色
+    //    Color originalColor = Gizmos.color;
+
+    //    // 绘制分离距离的 Gizmo
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawWireSphere(transform.position, m_separationRadius);
+
+    //    // 绘制对齐距离的 Gizmo
+    //    Gizmos.color = Color.green;
+    //    Gizmos.DrawWireSphere(transform.position, m_alignmentRadius);
+
+    //    // 绘制聚合距离的 Gizmo
+    //    Gizmos.color = Color.blue;
+    //    Gizmos.DrawWireSphere(transform.position, m_cohesionRadius);
+
+    //    // 绘制与父物体的距离的 Gizmo
+    //    //Gizmos.color = Color.yellow;
+    //    //Vector3 parentPosition = parent.transform.position;
+    //    //Gizmos.DrawLine(transform.position, parentPosition);
+    //    //Gizmos.DrawWireSphere(transform.position, Vector2.Distance(transform.position, parentPosition));
+
+    //    // 恢复 Gizmo 原始颜色
+    //    Gizmos.color = originalColor;
+    //}
+    #endregion
+
+    #region 进攻逻辑
+
+    private void BoidAttack()
     {
-        // 设置 Gizmo 颜色
-        Color originalColor = Gizmos.color;
+        if (statues != LightingBoidStatues.Attack)
+            return;
 
-        // 绘制分离距离的 Gizmo
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, m_separationRadius);
-
-        // 绘制对齐距离的 Gizmo
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, m_alignmentRadius);
-
-        // 绘制聚合距离的 Gizmo
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, m_cohesionRadius);
-
-        // 绘制与父物体的距离的 Gizmo
-        //Gizmos.color = Color.yellow;
-        //Vector3 parentPosition = parent.transform.position;
-        //Gizmos.DrawLine(transform.position, parentPosition);
-        //Gizmos.DrawWireSphere(transform.position, Vector2.Distance(transform.position, parentPosition));
-
-        // 恢复 Gizmo 原始颜色
-        Gizmos.color = originalColor;
+        percent += percentSpeed * Time.deltaTime;
+        if (percent > 1)
+        {
+            percent = 1;
+            statues = LightingBoidStatues.Idle;
+        }
+        transform.position = Bezier(percent,originPoint,controlPoint,targetTransform.position);
     }
+
+    private Vector3 GetMiddlePosition(Vector3 p0, Vector3 p2)
+    {
+        Vector3 middlePoint = Vector3.Lerp(p0, p2, 0.5f);
+        Vector3 normal = Vector2.Perpendicular(p0 - p2).normalized;
+        float randomDirection = Random.Range(-2f, 2f);
+        return middlePoint + (p2 - p0).magnitude * cuvature * randomDirection * normal;
+    }
+
+    private Vector2 Bezier(float t, Vector3 p0, Vector3 p1, Vector3 p2)
+    {
+        var p12 = Vector3.Lerp(p0, p1, t);
+        var p23 = Vector3.Lerp(p1, p2, t);
+        return Vector3.Lerp(p12, p23, t);
+    }
+
     #endregion
 
 }

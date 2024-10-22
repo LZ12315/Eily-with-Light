@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 808705304934099181}
   - component: {fileID: 4713215039688007239}
   m_Layer: 13
-  m_Name: Boid
+  m_Name: LightingBoid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -130,7 +130,7 @@ CircleCollider2D:
     m_Bits: 8192
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 4151
+    m_Bits: 20535
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -203,6 +203,10 @@ MonoBehaviour:
   flySpeed: 10
   initialDirection: {x: 0, y: 0}
   allBoids: []
+  cruiseRadius: 1.5
+  idleTime: 0.75
+  cruiseDuration: 1
+  cruisePosition: {x: 0, y: 0, z: 0}
   visionRadius: 5
   visionAngle: 60
   m_separationRadius: 2
@@ -214,3 +218,6 @@ MonoBehaviour:
   cohesionWeight: 1
   avoidanceWeight: 1
   parentWeight: 1
+  cuvature: 0.35
+  percentSpeed: 0.75
+  percent: 0
