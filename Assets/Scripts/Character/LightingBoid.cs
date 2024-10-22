@@ -9,11 +9,13 @@ public class LightingBoid : MonoBehaviour
 
     [Header("基本属性")]
     public BoidParent parent;
+    [SerializeField] private List<LightingBoid> allBoids;
     public float flySpeed;
-    private LightingBoidStatues statues = LightingBoidStatues.Idle;
+    [SerializeField] private LightingBoidStatues statues = LightingBoidStatues.Idle;
+
     public Vector2 initialDirection;
     private Vector2 finalDirection;
-    [SerializeField] private List<LightingBoid> allBoids;
+    private Tween doAnimate;
 
     [Header("待机相关")]
     public float cruiseRadius = 2f;
@@ -82,20 +84,11 @@ public class LightingBoid : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (statues == LightingBoidStatues.Follow)
-            return;
-
-        if(collision.GetComponent<BoidParent>() != null)
-            SetParent(collision.GetComponent<BoidParent>());
-    }
-
     public void SetParent(BoidParent parent)
     {
         this.parent = parent;
         parent.GetBoid(this);
-        statues = LightingBoidStatues.Follow;
+        SetBoidStatues(parent, LightingBoidStatues.Follow);
     }
 
     public void UpdateBoidsList(List<LightingBoid> boidsList)
@@ -103,10 +96,26 @@ public class LightingBoid : MonoBehaviour
         allBoids = boidsList;
     }
 
+    public void SetBoidStatues(BoidParent parent, LightingBoidStatues newStaues)
+    {
+        if(doAnimate != null)
+            doAnimate.Kill();
+        statues = newStaues;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (statues == LightingBoidStatues.Follow)
+            return;
+
+        if (collision.GetComponent<BoidParent>() != null)
+            SetParent(collision.GetComponent<BoidParent>());
+    }
+
     public void AttackStart(Transform enemyTrans)
     {
         targetTransform = enemyTrans;
-        statues = LightingBoidStatues.Attack;
+        SetBoidStatues(parent, LightingBoidStatues.Attack);
 
         originPoint = transform.position;
         controlPoint = GetMiddlePosition(transform.position, targetTransform.position);
@@ -133,7 +142,7 @@ public class LightingBoid : MonoBehaviour
                 }
             }
             else
-                transform.DOMove(cruisePosition, cruiseDuration);
+                doAnimate = transform.DOMove(cruisePosition, cruiseDuration);
         }
     }
     private void SetTargetPosition()
