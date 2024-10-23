@@ -6,6 +6,7 @@ public class BoidParent : MonoBehaviour
 {
     public float boidAttackInterval = 1f;
     [SerializeField] private List<LightingBoid> boids = new List<LightingBoid>();
+    private List<LightingBoid> boidsToRemove = new List<LightingBoid>();
     private Transform enemyTransform;
 
     public void GetBoid(LightingBoid newBoid)
@@ -13,6 +14,12 @@ public class BoidParent : MonoBehaviour
         boids.Add(newBoid);
         foreach (var boid in boids)
             boid.UpdateBoidsList(boids);
+    }
+
+    public void DeleteBoid(LightingBoid boidToDelete)
+    {
+        if (boids.Contains(boidToDelete))
+            boids.Remove(boidToDelete);
     }
 
     public void InvokeBoidAttack()
@@ -23,21 +30,16 @@ public class BoidParent : MonoBehaviour
 
     private IEnumerator BoidsAttack()
     {
-        for (int i = 0; i < boids.Count; i++)
+        for (int i = boids.Count - 1; i >= 0; i--)
         {
-            boids[i].AttackStart(enemyTransform);
+            boids[i].StartAttack(enemyTransform);
             yield return new WaitForSeconds(boidAttackInterval);
         }
     }
 
-    private void Start()
+    private void Update()
     {
-        StartCoroutine(attack());
-    }
-
-    private IEnumerator attack()
-    {
-        yield return new WaitForSeconds(10f);
-        InvokeBoidAttack();
+        if(Input.GetKeyDown(KeyCode.K))
+            InvokeBoidAttack();
     }
 }

@@ -5,19 +5,22 @@ using UnityEngine;
 
 public class BlackBoid : MonoBehaviour
 {
+    public CircleCollider2D circleCollider;
+    private float radius;
+
     [Header(" ‹…À¬ﬂº≠")]
     public int maxHealth;
     public float shrink = 0.8f;
     public float duration = 0.5f;
     private int currentHealth;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void Start()
     {
-        if (collision.GetComponent<LightingBoid>() != null)
-            GetAttack();
+        if (circleCollider != null)
+            radius = circleCollider.radius * Mathf.Max(transform.localScale.x, transform.localScale.y);
     }
 
-    private void GetAttack()
+    public void GetAttack()
     {
         currentHealth--;
 
@@ -27,6 +30,16 @@ public class BlackBoid : MonoBehaviour
         }
 
         Vector3 shrinkScale = transform.localScale * shrink;
-        transform.DOScale(shrinkScale, duration).SetEase(Ease.OutBounce);
+        transform.DOScale(shrinkScale, duration).SetEase(Ease.OutBounce).OnComplete(UpdateRadius);
+    }
+
+    private void UpdateRadius()
+    {
+        radius = circleCollider.radius * Mathf.Max(transform.localScale.x, transform.localScale.y);
+    }
+
+    public float ReturnRadius()
+    {
+        return radius;
     }
 }

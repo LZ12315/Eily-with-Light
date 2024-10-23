@@ -21,5 +21,5 @@ public enum ArchieveNumber
 
 public enum LightingBoidStatues
 {
-    Idle,Follow,Attack
+    Idle, Cruise, Follow, Attack
 }

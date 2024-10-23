@@ -127,10 +127,10 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 8192
+    m_Bits: 24576
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 20535
+    m_Bits: 4159
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -197,12 +197,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bf150cf4fc45a548a4dd1ed5438070d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 8036879356774096069}
   trigger: {fileID: 808705304934099181}
+  circleCollider: {fileID: 174917338109565819}
   parent: {fileID: 0}
+  radius: 0
   flySpeed: 10
+  statues: 0
   initialDirection: {x: 0, y: 0}
-  allBoids: []
   cruiseRadius: 1.5
   idleTime: 0.75
   cruiseDuration: 1
@@ -218,6 +219,8 @@ MonoBehaviour:
   cohesionWeight: 1
   avoidanceWeight: 1
   parentWeight: 1
+  reBoundSpeed: 1
+  reBoundTime: 1
   cuvature: 0.35
   percentSpeed: 0.75
-  percent: 0
+  isTracking: 0

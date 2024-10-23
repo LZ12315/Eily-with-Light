@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class LightingBoid : MonoBehaviour
 {
-    public Rigidbody2D rb;
     public Collider2D trigger;
+    public CircleCollider2D circleCollider;
+    private Rigidbody2D rb;
 
     [Header("基本属性")]
     public BoidParent parent;
-    [SerializeField] private List<LightingBoid> allBoids;
+    public float radius;
     public float flySpeed;
-    [SerializeField] private LightingBoidStatues statues = LightingBoidStatues.Idle;
+    [SerializeField] private LightingBoidStatues statues = LightingBoidStatues.Cruise;
 
+    private List<LightingBoid> allBoids;
     public Vector2 initialDirection;
     private Vector2 finalDirection;
     private Tween doAnimate;
+    private Sequence doAnimates;
 
     [Header("待机相关")]
     public float cruiseRadius = 2f;
@@ -45,12 +48,17 @@ public class LightingBoid : MonoBehaviour
     public float parentWeight = 1.0f;
 
     [Header("攻击相关")]
+    public float reBoundSpeed;
+    public float reBoundTime;
+    public float reBoundShrinkCoef = 0.8f;
     public float cuvature = 1f;
     public float percentSpeed = 0.00005f;
+    [SerializeField] private bool isTracking;
     private Transform targetTransform;
+    private float targetRadius;
     private Vector3 originPoint;
     private Vector3 controlPoint;
-    [SerializeField] private float percent;
+    private float percent;
 
     private void Awake()
     {
@@ -60,26 +68,25 @@ public class LightingBoid : MonoBehaviour
     private void Start()
     {
         visionConeThreshold = Mathf.Cos(visionAngle * 0.5f * Mathf.Deg2Rad);
-        SetStatuesIdle();
-    }
+        SetStatuesCruise();
 
-    private void Update()
-    {
-
+        if (circleCollider != null)
+            radius = circleCollider.radius * Mathf.Max(transform.localScale.x, transform.localScale.y);
     }
 
     private void FixedUpdate()
     {
         switch (statues)
         {
-            case LightingBoidStatues.Idle:
-                BoidIdle();
+            case LightingBoidStatues.Cruise:
+                BoidCruise();
                 break;
             case LightingBoidStatues.Follow:
                 BoidFollow();
                 break;
             case LightingBoidStatues.Attack:
-                BoidAttack();
+                if (isTracking)
+                    OnTrack();
                 break;
         }
     }
@@ -98,8 +105,7 @@ public class LightingBoid : MonoBehaviour
 
     public void SetBoidStatues(BoidParent parent, LightingBoidStatues newStaues)
     {
-        if(doAnimate != null)
-            doAnimate.Kill();
+        ActionSwitching();
         statues = newStaues;
     }
 
@@ -112,18 +118,27 @@ public class LightingBoid : MonoBehaviour
             SetParent(collision.GetComponent<BoidParent>());
     }
 
-    public void AttackStart(Transform enemyTrans)
+    private void BoidDestroy()
     {
-        targetTransform = enemyTrans;
-        SetBoidStatues(parent, LightingBoidStatues.Attack);
+        ActionSwitching();
 
-        originPoint = transform.position;
-        controlPoint = GetMiddlePosition(transform.position, targetTransform.position);
+        parent.DeleteBoid(this);
+        gameObject.SetActive(false);
     }
 
-    #region 待机逻辑
+    private void ActionSwitching()
+    {
+        if (doAnimate != null)
+            doAnimate.Kill();
+        if (doAnimates != null)
+            doAnimates.Kill();
 
-    private void BoidIdle()
+        rb.velocity = Vector3.zero;
+    }
+
+    #region 巡游逻辑
+
+    private void BoidCruise()
     {
         if(!isCrusing)
         {
@@ -145,6 +160,7 @@ public class LightingBoid : MonoBehaviour
                 doAnimate = transform.DOMove(cruisePosition, cruiseDuration);
         }
     }
+
     private void SetTargetPosition()
     {
         float randomAngle = Random.Range(0f, 360f);
@@ -155,9 +171,9 @@ public class LightingBoid : MonoBehaviour
         cruisePosition = new Vector2(x, y);
     }
 
-    public void SetStatuesIdle()
+    public void SetStatuesCruise()
     {
-        statues = LightingBoidStatues.Idle;
+        statues = LightingBoidStatues.Cruise;
         center = transform.position;
         isCrusing = false;
     }
@@ -340,18 +356,67 @@ public class LightingBoid : MonoBehaviour
 
     #region 进攻逻辑
 
-    private void BoidAttack()
+    public void StartAttack(Transform enemyTrans)
+    {
+        targetTransform = enemyTrans;
+        targetRadius = enemyTrans.GetComponent<BlackBoid>().ReturnRadius();
+        SetBoidStatues(parent, LightingBoidStatues.Attack);
+        isTracking = true;
+
+        originPoint = transform.position;
+        controlPoint = GetMiddlePosition(transform.position, targetTransform.position);
+    }
+
+    private void OnAttack()
+    {
+        BlackBoid blackBoid = targetTransform.gameObject.GetComponent<BlackBoid>();
+        blackBoid.GetAttack();
+        ActionSwitching();
+        isTracking = false;
+
+        OnRebound(targetTransform);
+    }
+
+    private void OnRebound(Transform targetTrans)
+    {
+        Vector3 reBoundDir = (transform.position - targetTrans.position).normalized;
+        Vector3 reBoundEndPos1 = transform.position + reBoundDir * reBoundSpeed * reBoundTime * 0.8f;
+        Vector3 reBoundEndPos2 = reBoundEndPos1 + reBoundDir * reBoundSpeed * reBoundTime * 0.2f;
+
+        Sequence reBoundSequence = DOTween.Sequence();
+        doAnimates = reBoundSequence;
+        Vector3 originScale = transform.localScale;
+        Vector3 shrinkScale = transform.localScale * reBoundShrinkCoef;
+
+        reBoundSequence.Append(transform.DOScale(shrinkScale, 0.05f).SetEase(Ease.OutBounce));
+        reBoundSequence.Append(transform.DOScale(originScale, 0.1f).SetEase(Ease.OutBounce));
+        reBoundSequence.Join(transform.DOMove(reBoundEndPos1, 0.2f * reBoundTime));
+        reBoundSequence.Append(transform.DOMove(reBoundEndPos2, 0.8f * reBoundTime)).OnComplete(BoidDestroy);
+    }
+
+    private void OnTrack()
     {
         if (statues != LightingBoidStatues.Attack)
             return;
 
-        percent += percentSpeed * Time.deltaTime;
-        if (percent > 1)
+        Vector3 direction = (transform.position - targetTransform.position).normalized;
+        float distance = (transform.position - targetTransform.position).magnitude;
+        float radiusSum = radius + targetRadius;
+        if (distance > radiusSum)
         {
-            percent = 1;
-            statues = LightingBoidStatues.Idle;
+            percent += percentSpeed * Time.deltaTime;
+            if (percent > 1)
+            {
+                percent = 1;
+                statues = LightingBoidStatues.Cruise;
+            }
+            transform.position = Bezier(percent, originPoint, controlPoint, targetTransform.position);
         }
-        transform.position = Bezier(percent,originPoint,controlPoint,targetTransform.position);
+        else
+        {
+            transform.position = targetTransform.position + direction * radiusSum;
+            OnAttack();
+        }
     }
 
     private Vector3 GetMiddlePosition(Vector3 p0, Vector3 p2)
@@ -368,7 +433,6 @@ public class LightingBoid : MonoBehaviour
         var p23 = Vector3.Lerp(p1, p2, t);
         return Vector3.Lerp(p12, p23, t);
     }
-
     #endregion
 
 }
