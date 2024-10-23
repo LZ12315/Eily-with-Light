@@ -12,7 +12,7 @@ public class CharCtrl : MonoBehaviour
     public bool isBouncing;
 
     /*ÊÖ¶¯ÉèÖÃ*/
-    public float speed=5.8f, jumpForce=9f, acceleration=1.5f;
+    public float speed=5.8f, jumpForce=9f, acceleration=2.5f;
     public Transform groundCheck;
     public LayerMask ground;
 
@@ -84,7 +84,6 @@ public class CharCtrl : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
         if(!isGround&& collision.gameObject.layer == LayerMask.NameToLayer("ground"))
         {
             isBouncing = true;
@@ -93,6 +92,21 @@ public class CharCtrl : MonoBehaviour
 
     void AnimPlay()
     {
-        
+        if (isGround && rb.velocity.x == 0)
+        {
+            Debug.Log("Idle");
+        }
+        else if (isGround && rb.velocity.x != 0)
+        {
+            Debug.Log("Running");
+        }
+        else if (!isGround&&rb.velocity.y>=0) 
+        {
+            Debug.Log("Raising");
+        }
+        else if((!isGround && rb.velocity.y < 0))
+        {
+            Debug.Log("Falling");
+        }
     }
 }
