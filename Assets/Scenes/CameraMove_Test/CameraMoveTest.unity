@@ -1363,7 +1363,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 6.3
+  orthographic size: 5.49
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1388,7 +1388,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 384.00433, y: -7.881055, z: -0.11104965}
+  m_LocalPosition: {x: 385.44434, y: -8.691055, z: -0.11104965}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2882,8 +2882,8 @@ MonoBehaviour:
     panCameraContact: 1
     cameraOnleft: {fileID: 0}
     cameraOnright: {fileID: 0}
-    panDirection: 1
-    panDistance: 3
+    panDirection: 0
+    panDistance: 3.42
     panTime: 0.35
 --- !u!4 &1009235779
 Transform:
@@ -2894,7 +2894,7 @@ Transform:
   m_GameObject: {fileID: 1009235777}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 19.805593, y: -9.615877, z: -0.27412415}
+  m_LocalPosition: {x: 390.02, y: -10.62, z: -0.27412415}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2932,7 +2932,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.9874526, y: 1.755583}
+  m_Offset: {x: 0.96157837, y: 1.8815646}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2943,7 +2943,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 6.8298607, y: 4.511166}
+  m_Size: {x: 3.6263428, y: 4.763129}
   m_EdgeRadius: 0
 --- !u!1 &1046679040
 GameObject:
@@ -4575,7 +4575,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1912340638
 Transform:
   m_ObjectHideFlags: 0
@@ -4653,7 +4653,7 @@ MonoBehaviour:
   m_Follow: {fileID: 402520248}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 6.3
+    OrthographicSize: 5.49
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
