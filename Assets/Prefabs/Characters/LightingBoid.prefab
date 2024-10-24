@@ -221,6 +221,7 @@ MonoBehaviour:
   parentWeight: 1
   reBoundSpeed: 1
   reBoundTime: 1
+  reBoundShrinkCoef: 0.8
   cuvature: 0.35
   percentSpeed: 0.75
-  isTracking: 0
+  HitEffect: {fileID: 7494938832722732842, guid: 25395fe0e24b3e340b8b2c22d8939829, type: 3}
