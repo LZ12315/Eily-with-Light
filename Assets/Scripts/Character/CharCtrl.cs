@@ -1,21 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class CharCtrl : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Collider2D coll;
     private Animator anim;
-    public float curSpeed;
-    public bool isGround;
-    public bool isBouncing;
+    private float curSpeed;
+    private bool isGround;
+    private bool isBouncing;
+    private float curScale = 0f;
 
     /*手动设置*/
     public float speed=5.8f, jumpForce=9f, acceleration=2.5f;
     public Transform groundCheck;
     public LayerMask ground;
-
+    public ParticleSystem particle;
 
     /*动画检测专用*/
     private bool isRaising;
@@ -44,6 +46,7 @@ public class CharCtrl : MonoBehaviour
         GroundMovement(moveDir);
         AirMovement(moveDir);
         AnimPlay();
+        ParticlePlay();
     }
 
     void GroundMovement(float moveDir)
@@ -92,21 +95,62 @@ public class CharCtrl : MonoBehaviour
 
     void AnimPlay()
     {
-        if (isGround && rb.velocity.x == 0)
+        //if (isGround && rb.velocity.x == 0)
+        //{
+        //    Debug.Log("Idle");
+        //}
+        //else if (isGround && rb.velocity.x != 0)
+        //{
+        //    Debug.Log("Running");
+        //}
+        //else if (!isGround && rb.velocity.y >= 0)
+        //{
+        //    Debug.Log("Raising");
+        //}
+        //else if ((!isGround && rb.velocity.y < 0))
+        //{
+        //    Debug.Log("Falling");
+        //}
+    }
+
+    void ParticlePlay()
+    {
+        //调整粒子方向
+        float angle = Mathf.Atan2(rb.velocity.x, -rb.velocity.y) * Mathf.Rad2Deg;
+
+        if (rb.velocity!=Vector2.zero)
         {
-            Debug.Log("Idle");
+            //启用粒子
+            //particle.gameObject.SetActive(true);
+            particle.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            curScale = (Mathf.MoveTowards(curScale,1f, 0.3f * Time.fixedDeltaTime));
         }
-        else if (isGround && rb.velocity.x != 0)
+        else
         {
-            Debug.Log("Running");
+            //particle.gameObject.SetActive(false);
+            particle.transform.rotation = Quaternion.Euler(new Vector3(90,0, angle));
+            curScale = (Mathf.MoveTowards(curScale, 0f, 0.3f * Time.fixedDeltaTime));
         }
-        else if (!isGround&&rb.velocity.y>=0) 
-        {
-            Debug.Log("Raising");
-        }
-        else if((!isGround && rb.velocity.y < 0))
-        {
-            Debug.Log("Falling");
-        }
+        particle.transform.localScale = new Vector3(curScale, curScale, curScale);
+
+        ////动态参数
+        //var main = particle.main;
+        //if (rb.velocity.x==0)
+        //{
+        //    main.startSpeed = 4f;
+        //    main.startLifetime = 0.8f;
+        //    main.simulationSpeed = 0.8f;
+        //}
+        //else
+        //{
+        //    //float defSpeed = Mathf.Sqrt(rb.velocity.x * rb.velocity.x + rb.velocity.y * rb.velocity.y);
+        //    main.startSpeed = curSpeed;
+        //    main.startLifetime = curSpeed * 0.1f;
+        //    main.simulationSpeed = curSpeed * 0.2f;
+        //}
+
+
+
+
     }
 }
