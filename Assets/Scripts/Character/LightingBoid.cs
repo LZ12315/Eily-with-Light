@@ -53,7 +53,8 @@ public class LightingBoid : MonoBehaviour
     public float reBoundShrinkCoef = 0.8f;
     public float cuvature = 1f;
     public float percentSpeed = 0.00005f;
-    [SerializeField] private bool isTracking;
+    public GameObject HitEffect;
+    private bool isTracking;
     private Transform targetTransform;
     private float targetRadius;
     private Vector3 originPoint;
@@ -374,6 +375,10 @@ public class LightingBoid : MonoBehaviour
         ActionSwitching();
         isTracking = false;
 
+        Vector3 faceDir = (transform.position - targetTransform.position).normalized;
+        Quaternion hitQuaternion = Quaternion.LookRotation(faceDir);
+
+        Instantiate(HitEffect, transform.position, hitQuaternion);
         OnRebound(targetTransform);
     }
 
