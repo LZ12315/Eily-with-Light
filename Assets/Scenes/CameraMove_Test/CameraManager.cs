@@ -111,7 +111,7 @@ public class CameraManager : MonoBehaviour
         //handle pan from Trigger
         if (!panToStartingPos)
         {
-            Debug.Log("相机不回到初始位置");
+           // Debug.Log("相机不回到初始位置");
             //set the direction and distance
             switch (panDirection)
             {
@@ -139,7 +139,7 @@ public class CameraManager : MonoBehaviour
         //handle the pan back to starting position
         else
         {
-            Debug.Log("相机回到初始位置");
+            //Debug.Log("相机回到初始位置");
             startingPos = _framingTransposer.m_TrackedObjectOffset;
             endPos = _startingTrakedObjectOffset;
         }

@@ -17,7 +17,7 @@ public class CameraControlTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("进入触发器");
+        //Debug.Log("进入触发器");
         if (collision.CompareTag("Player"))
         {
             
@@ -31,7 +31,7 @@ public class CameraControlTrigger : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("离开触发器");
+        //Debug.Log("离开触发器");
         if (collision.CompareTag("Player"))
         {
             Vector2 exitDirection = (collision.transform.position - _coll.bounds.center).normalized;
