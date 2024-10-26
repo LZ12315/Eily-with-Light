@@ -18,6 +18,7 @@ public class CharCtrl : MonoBehaviour
     public Transform groundCheck;
     public LayerMask ground;
     public ParticleSystem particle;
+    public GameObject camFollowPos;
 
     /*动画检测专用*/
     private bool isRaising;
@@ -47,6 +48,7 @@ public class CharCtrl : MonoBehaviour
         AirMovement(moveDir);
         AnimPlay();
         ParticlePlay();
+        SetCamPos();
     }
 
     void GroundMovement(float moveDir)
@@ -132,25 +134,10 @@ public class CharCtrl : MonoBehaviour
             curScale = (Mathf.MoveTowards(curScale, 0f, 0.3f * Time.fixedDeltaTime));
         }
         particle.transform.localScale = new Vector3(curScale, curScale, curScale);
+    }
 
-        ////动态参数
-        //var main = particle.main;
-        //if (rb.velocity.x==0)
-        //{
-        //    main.startSpeed = 4f;
-        //    main.startLifetime = 0.8f;
-        //    main.simulationSpeed = 0.8f;
-        //}
-        //else
-        //{
-        //    //float defSpeed = Mathf.Sqrt(rb.velocity.x * rb.velocity.x + rb.velocity.y * rb.velocity.y);
-        //    main.startSpeed = curSpeed;
-        //    main.startLifetime = curSpeed * 0.1f;
-        //    main.simulationSpeed = curSpeed * 0.2f;
-        //}
-
-
-
-
+    void SetCamPos()
+    {
+            camFollowPos.transform.position = new Vector3(transform.position.x + 4.5f, transform.position.y, transform.position.z);
     }
 }
