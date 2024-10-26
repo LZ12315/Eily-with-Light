@@ -1242,6 +1242,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Unicorn
       objectReference: {fileID: 0}
+    - target: {fileID: 8809645365788191702, guid: 62f32f7d46aa7f64ea82d38e6e3a63ec, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8896192530060747141, guid: 62f32f7d46aa7f64ea82d38e6e3a63ec, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
