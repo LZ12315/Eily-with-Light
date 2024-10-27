@@ -141,6 +141,6 @@ public class CharCtrl : MonoBehaviour
 
     void SetCamPos()
     {
-            camFollowPos.transform.position = new Vector3(transform.position.x + 4.5f, transform.position.y, transform.position.z);
+            //camFollowPos.transform.position = new Vector3(transform.position.x + 4.5f, transform.position.y, transform.position.z);
     }
 }
