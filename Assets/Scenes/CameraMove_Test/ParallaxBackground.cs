@@ -5,7 +5,7 @@ using UnityEngine;
 public class ParallaxBackground : MonoBehaviour
 {
     // Start is called before the first frame update
-    private Transform cameraTransform;
+    public Transform cameraTransform;
     private Vector3 lastCameraPosition;
 
   
@@ -19,7 +19,8 @@ public class ParallaxBackground : MonoBehaviour
     void Update()
     {
         Vector3 deltaMovement=cameraTransform.position-lastCameraPosition;
-        transform.position+=deltaMovement;
+        float parallaxEffectMutiplier = .5f;
+        transform.position+=deltaMovement*parallaxEffectMutiplier;
         lastCameraPosition=cameraTransform.position+deltaMovement;
     }
 }
