@@ -135,6 +135,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlackBoid
       objectReference: {fileID: 0}
+    - target: {fileID: 1764273937807921477, guid: 08e63181eec4581438eda60644c6ddb5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2804238130850774481, guid: 08e63181eec4581438eda60644c6ddb5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -550,7 +554,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8463329158924424275, guid: 454ce6b85d8553148809f968998bb0fa, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -767,6 +771,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LightingBoid
       objectReference: {fileID: 0}
+    - target: {fileID: 8463329158924424275, guid: 454ce6b85d8553148809f968998bb0fa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -826,13 +834,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8463329158924424275, guid: 454ce6b85d8553148809f968998bb0fa, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 454ce6b85d8553148809f968998bb0fa, type: 3}
+--- !u!1 &2039187949 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1764273937807921477, guid: 08e63181eec4581438eda60644c6ddb5, type: 3}
+  m_PrefabInstance: {fileID: 754590429}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2109180931
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -841,13 +854,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1554495090387691854, guid: 62f32f7d46aa7f64ea82d38e6e3a63ec, type: 3}
+      propertyPath: BlackBoid
+      value: 
+      objectReference: {fileID: 2039187949}
     - target: {fileID: 4773726081757892012, guid: 62f32f7d46aa7f64ea82d38e6e3a63ec, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.670767
+      value: 6.72
       objectReference: {fileID: 0}
     - target: {fileID: 4773726081757892012, guid: 62f32f7d46aa7f64ea82d38e6e3a63ec, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.63861465
+      value: 8.2
       objectReference: {fileID: 0}
     - target: {fileID: 4773726081757892012, guid: 62f32f7d46aa7f64ea82d38e6e3a63ec, type: 3}
       propertyPath: m_LocalPosition.z
@@ -885,7 +902,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Unicorn
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4561014708746796671, guid: 62f32f7d46aa7f64ea82d38e6e3a63ec, type: 3}
+    - {fileID: 1554495090387691854, guid: 62f32f7d46aa7f64ea82d38e6e3a63ec, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
