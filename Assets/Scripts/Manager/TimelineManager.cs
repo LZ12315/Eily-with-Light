@@ -32,15 +32,15 @@ public class TimelineManager : MonoBehaviour
             if (trigger.gameObject == triggerObjs[i])
             {
                 curDirector = i + 1;
-                PlayTimeline(timelineDirectors[i + 1]);
+                PlayTimeline(i+1);
                 trigger.gameObject.SetActive(false);
             }
         }
     }
 
-    void PlayTimeline(PlayableDirector director)
+    public void PlayTimeline(int directorNum)
     {
-        director.Play();
+        timelineDirectors[directorNum].Play();
     }
 
     public void TimelineStartSignal()

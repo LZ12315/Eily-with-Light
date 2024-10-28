@@ -7,12 +7,13 @@ public class BlackBoid : MonoBehaviour
 {
     public CircleCollider2D circleCollider;
     private float radius;
+    public TimelineManager timelineManager;
 
     [Header("ÊÜÉËÂß¼­")]
     public int maxHealth;
     public float shrink = 0.8f;
     public float duration = 0.5f;
-    private int currentHealth;
+    public int currentHealth;
 
     void Start()
     {
@@ -27,6 +28,7 @@ public class BlackBoid : MonoBehaviour
         if(currentHealth <= 0)
         {
             currentHealth = 0;
+            BlackBoidDied();
         }
 
         Vector3 shrinkScale = transform.localScale * shrink;
@@ -41,5 +43,10 @@ public class BlackBoid : MonoBehaviour
     public float ReturnRadius()
     {
         return radius;
+    }
+
+    void BlackBoidDied()
+    {
+        timelineManager.PlayTimeline(3);
     }
 }

@@ -108,4 +108,9 @@ public class SceneLoadManager : MonoBehaviour
             SceneManager.SetActiveScene(sceneToActive);
         }
     }
+
+    public void ToSecondScene()
+    {
+
+    }
 }
