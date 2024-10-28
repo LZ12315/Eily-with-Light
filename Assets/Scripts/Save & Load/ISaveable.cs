@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Build.Pipeline;
 using UnityEngine;
+#if UNITY_EDITOR 
+using UnityEditor; 
+#endif
 
 /// <summary>
 /// 一个接口 定义数据存储相关的操作 所有需要被保存的对象都应该实现这个接口

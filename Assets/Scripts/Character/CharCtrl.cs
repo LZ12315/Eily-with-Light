@@ -9,15 +9,17 @@ public class CharCtrl : MonoBehaviour
     private Collider2D coll;
     private Animator anim;
     private float curSpeed;
-    private bool isGround;
+    public bool isGround;
     private bool isBouncing;
     private float curScale = 0f;
+    private TimelineManager timelineManager;
 
     /*手动设置*/
     public float speed=5.8f, jumpForce=9f, acceleration=2.5f;
     public Transform groundCheck;
     public LayerMask ground;
     public ParticleSystem particle;
+    public GameObject camFollowPos;
 
     /*动画检测专用*/
     private bool isRaising;
@@ -25,6 +27,7 @@ public class CharCtrl : MonoBehaviour
 
     void Awake()
     {
+        timelineManager = GetComponent<TimelineManager>();
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
@@ -33,20 +36,24 @@ public class CharCtrl : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Jump")&&isGround/*&&jumpCount>0*/)
+        if(!timelineManager.isPlaying)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);//跳跃
+            if (Input.GetButtonDown("Jump") && isGround/*&&jumpCount>0*/)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);//跳跃
+            }
+            if (Input.GetKeyDown(KeyCode.S) && !isGround)
+            {
+                rb.gravityScale = 10;//快速下落
+            }
+            isGround = Physics2D.OverlapCircle(groundCheck.position, 0.5f, ground);//落地检测
+            float moveDir = Input.GetAxisRaw("Horizontal"); // 获取移动方向
+            GroundMovement(moveDir);
+            AirMovement(moveDir);
+            AnimPlay();
+            ParticlePlay();
+            SetCamPos();
         }
-        if(Input.GetKeyDown(KeyCode.S)&&!isGround)
-        {
-            rb.gravityScale = 10;//快速下落
-        }
-        isGround = Physics2D.OverlapCircle(groundCheck.position, 0.2f, ground);//落地检测
-        float moveDir = Input.GetAxisRaw("Horizontal"); // 获取移动方向
-        GroundMovement(moveDir);
-        AirMovement(moveDir);
-        AnimPlay();
-        ParticlePlay();
     }
 
     void GroundMovement(float moveDir)
@@ -121,36 +128,19 @@ public class CharCtrl : MonoBehaviour
         if (rb.velocity!=Vector2.zero)
         {
             //启用粒子
-            //particle.gameObject.SetActive(true);
             particle.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
             curScale = (Mathf.MoveTowards(curScale,1f, 0.3f * Time.fixedDeltaTime));
         }
         else
         {
-            //particle.gameObject.SetActive(false);
             particle.transform.rotation = Quaternion.Euler(new Vector3(90,0, angle));
             curScale = (Mathf.MoveTowards(curScale, 0f, 0.3f * Time.fixedDeltaTime));
         }
         particle.transform.localScale = new Vector3(curScale, curScale, curScale);
+    }
 
-        ////动态参数
-        //var main = particle.main;
-        //if (rb.velocity.x==0)
-        //{
-        //    main.startSpeed = 4f;
-        //    main.startLifetime = 0.8f;
-        //    main.simulationSpeed = 0.8f;
-        //}
-        //else
-        //{
-        //    //float defSpeed = Mathf.Sqrt(rb.velocity.x * rb.velocity.x + rb.velocity.y * rb.velocity.y);
-        //    main.startSpeed = curSpeed;
-        //    main.startLifetime = curSpeed * 0.1f;
-        //    main.simulationSpeed = curSpeed * 0.2f;
-        //}
-
-
-
-
+    void SetCamPos()
+    {
+            //camFollowPos.transform.position = new Vector3(transform.position.x + 4.5f, transform.position.y, transform.position.z);
     }
 }
