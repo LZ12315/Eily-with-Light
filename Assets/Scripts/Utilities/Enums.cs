@@ -18,3 +18,8 @@ public enum ArchieveNumber
 {
     Ar1,Ar2, Ar3
 };
+
+public enum LightingBoidStatues
+{
+    Idle, Cruise, Follow, Attack
+}
