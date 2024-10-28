@@ -196,6 +196,12 @@ public class CameraManager : MonoBehaviour
             _framingTransposer = _currentVitualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
         }
     }
-
+    //public enum PanDirection // ·½ÏòÃ¶¾Ù
+    //{
+    //    Up,
+    //    Down,
+    //    Left,
+    //    Right
+    //}
     #endregion
 }

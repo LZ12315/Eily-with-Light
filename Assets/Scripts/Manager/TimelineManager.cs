@@ -15,6 +15,7 @@ public class TimelineManager : MonoBehaviour
     public CinemachineVirtualCamera follow2;
     public GameObject BlackBoid;
     private CharCtrl CharCtrl;
+    public BoidParent BoidParent;
 
     void Awake()
     {
@@ -54,10 +55,17 @@ public class TimelineManager : MonoBehaviour
 
     public void SwitchToSmall()
     {
-        transform.localScale *=0.3f;
-        CharCtrl.particle.transform.localScale *= 0.3f;
-        follow1.gameObject.SetActive(false);
-        follow2.gameObject.SetActive(true);
         BlackBoid.SetActive(true);
+        isPlaying = true;
     }
+
+    public void SmallBall() 
+    {
+        for (int i = 0; i < BoidParent.boids.Count; i++)
+        {
+            BoidParent.boids[i].transform.GetChild(0).localScale = new Vector3(0.3f, 0.3f, 0.3f);
+        }
+        
+    }
+
 }

@@ -57,11 +57,11 @@ public class CustomInspectorObjects
     [HideInInspector] public float panDistance = 3.0f; // 距离
     [HideInInspector] public float panTime = 0.35f; // 时间 } public enum PanDirect
 
-    public enum PanDirection // 方向枚举
-    {
-        Up,
-        Down,
-        Left,
-        Right
-    }
+    //public enum PanDirection // 方向枚举
+    //{
+    //    Up,
+    //    Down,
+    //    Left,
+    //    Right
+    //}
 }

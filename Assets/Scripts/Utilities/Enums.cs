@@ -28,3 +28,11 @@ public enum SaturationStatues
 {
     TurnOn, TurnOff, Work, Disable
 }
+
+public enum PanDirection // ·½ÏòÃ¶¾Ù
+{
+    Up,
+    Down,
+    Left,
+    Right
+}

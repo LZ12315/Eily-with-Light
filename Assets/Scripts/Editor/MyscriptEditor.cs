@@ -1,6 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 using Cinemachine;
+using static CustomInspectorObjects;
 
 [CustomEditor(typeof(CameraControlTrigger))] // ×Ô¶¨Òåinspector
 public class MyscriptEditor : Editor
