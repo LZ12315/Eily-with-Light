@@ -54,3 +54,6 @@ TagManager:
   - name: Front
     uniqueID: 3423478861
     locked: 0
+  - name: CameraSortingLayer
+    uniqueID: 315748863
+    locked: 0
