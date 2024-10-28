@@ -46,7 +46,7 @@ public class CharCtrl : MonoBehaviour
             {
                 rb.gravityScale = 10;//快速下落
             }
-            isGround = Physics2D.OverlapCircle(groundCheck.position, 0.2f, ground);//落地检测
+            isGround = Physics2D.OverlapCircle(groundCheck.position, 0.5f, ground);//落地检测
             float moveDir = Input.GetAxisRaw("Horizontal"); // 获取移动方向
             GroundMovement(moveDir);
             AirMovement(moveDir);
