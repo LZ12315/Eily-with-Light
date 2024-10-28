@@ -76,6 +76,9 @@ GameObject:
   - component: {fileID: 4578754029283537242}
   - component: {fileID: 2564906948986181611}
   - component: {fileID: 4561014708746796671}
+  - component: {fileID: 5395424205646636389}
+  - component: {fileID: 858364280387490825}
+  - component: {fileID: 1554495090387691854}
   m_Layer: 0
   m_Name: Unicorn
   m_TagString: Untagged
@@ -275,6 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14571460eb4b6e2488fb9af7243a2fbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isGround: 0
   speed: 5.8
   jumpForce: 9
   acceleration: 2.5
@@ -284,6 +288,59 @@ MonoBehaviour:
     m_Bits: 8
   particle: {fileID: 1348776051991718397}
   camFollowPos: {fileID: 2545318589919229648}
+--- !u!114 &5395424205646636389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6861886614860916395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0f53830cd614b84a975d029d69e1871, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boidAttackInterval: 1
+  boids: []
+--- !u!114 &858364280387490825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6861886614860916395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9d6c91c14baf4c46b63cac9e290fd30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  rb: {fileID: 0}
+--- !u!114 &1554495090387691854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6861886614860916395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5601910af03960646bf680d804a1ca80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerObjs:
+  - {fileID: 0}
+  - {fileID: 0}
+  timelineDirectors:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  isPlaying: 0
+  curDirector: 0
+  follow1: {fileID: 0}
+  follow2: {fileID: 0}
+  BlackBoid: {fileID: 0}
 --- !u!1 &7756620016413888392
 GameObject:
   m_ObjectHideFlags: 0
@@ -5125,6 +5182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 463440854056850638}
   - component: {fileID: 1497053300088506922}
+  - component: {fileID: 4139301607881611638}
   m_Layer: 0
   m_Name: UniTex
   m_TagString: Untagged
@@ -5199,6 +5257,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &4139301607881611638
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8446265199197236098}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 09958d4b4db22e74b837bfd3d890deb1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8809645365788191702
 GameObject:
   m_ObjectHideFlags: 0
