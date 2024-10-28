@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6348884551771297494}
   - component: {fileID: 4802553623402871348}
+  - component: {fileID: 7464775261020950858}
   m_Layer: 0
   m_Name: ShockWaveEffect
   m_TagString: Untagged
@@ -71,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 315748863
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 59774951f10040c4d8df36a28803bf4a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -84,3 +85,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7464775261020950858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2560772845919309596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f76f0a62e15b38948ab5ae65ebcd0181, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shockWaveTime: 0.5
+  material: {fileID: 0}

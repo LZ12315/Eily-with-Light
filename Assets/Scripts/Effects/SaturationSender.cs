@@ -34,10 +34,7 @@ public class SaturationSender : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyUp(KeyCode.Escape))
-            ControlOn();
-        if(Input.GetKeyDown(KeyCode.Escape))
-            ControlOff();
+
     }
 
     private void FixedUpdate()

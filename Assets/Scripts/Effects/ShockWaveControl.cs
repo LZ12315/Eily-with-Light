@@ -17,15 +17,7 @@ public class ShockWaveControl : MonoBehaviour
         material = GetComponent<SpriteRenderer>().material;
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            CallShockWave();
-        }
-    }
-
-    public void CallShockWave()
+    public void CallShockWave(float startPos, float endPos)
     {
         shockWaveCorotine = StartCoroutine(ShockWaveAction(-0.1f, 1f));
     }
