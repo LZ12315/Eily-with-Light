@@ -5,7 +5,7 @@ using UnityEngine;
 public class BoidParent : MonoBehaviour
 {
     public float boidAttackInterval = 1f;
-    [SerializeField] private List<LightingBoid> boids = new List<LightingBoid>();
+    [SerializeField] public List<LightingBoid> boids = new List<LightingBoid>();
     private List<LightingBoid> boidsToRemove = new List<LightingBoid>();
     private Transform enemyTransform;
 
