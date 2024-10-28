@@ -74,9 +74,8 @@ GameObject:
   - component: {fileID: 3677617453566186210}
   - component: {fileID: 7809959781133840903}
   - component: {fileID: 4578754029283537242}
-  - component: {fileID: 4561014708746796671}
-  - component: {fileID: 5104927556030733513}
   - component: {fileID: 2564906948986181611}
+  - component: {fileID: 4561014708746796671}
   m_Layer: 0
   m_Name: Unicorn
   m_TagString: Untagged
@@ -219,41 +218,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0.08038144, y: -0.20674357}
   m_Size: {x: 1.5987087, y: 1.5987087}
   m_Direction: 1
---- !u!114 &4561014708746796671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6861886614860916395}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14571460eb4b6e2488fb9af7243a2fbc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5.8
-  jumpForce: 9
-  acceleration: 2.5
-  groundCheck: {fileID: 5640167015071051452}
-  ground:
-    serializedVersion: 2
-    m_Bits: 8
-  particle: {fileID: 1348776051991718397}
-  camFollowPos: {fileID: 2545318589919229648}
---- !u!114 &5104927556030733513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6861886614860916395}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0f53830cd614b84a975d029d69e1871, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boidAttackInterval: 1
-  boids: []
 --- !u!61 &2564906948986181611
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -299,6 +263,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.440796, y: 2.09768}
   m_EdgeRadius: 0
+--- !u!114 &4561014708746796671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6861886614860916395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14571460eb4b6e2488fb9af7243a2fbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5.8
+  jumpForce: 9
+  acceleration: 2.5
+  groundCheck: {fileID: 5640167015071051452}
+  ground:
+    serializedVersion: 2
+    m_Bits: 8
+  particle: {fileID: 1348776051991718397}
+  camFollowPos: {fileID: 2545318589919229648}
 --- !u!1 &7756620016413888392
 GameObject:
   m_ObjectHideFlags: 0

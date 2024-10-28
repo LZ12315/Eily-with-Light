@@ -9,7 +9,7 @@ public class CharCtrl : MonoBehaviour
     private Collider2D coll;
     private Animator anim;
     private float curSpeed;
-    private bool isGround;
+    public bool isGround;
     private bool isBouncing;
     private float curScale = 0f;
     private TimelineManager timelineManager;
