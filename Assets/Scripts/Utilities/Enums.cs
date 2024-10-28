@@ -23,3 +23,8 @@ public enum LightingBoidStatues
 {
     Idle, Cruise, Follow, Attack
 }
+
+public enum SaturationStatues
+{
+    TurnOn, TurnOff, Work, Disable
+}
