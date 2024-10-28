@@ -12430,6 +12430,7 @@ GameObject:
   - component: {fileID: 994289942}
   - component: {fileID: 994289941}
   - component: {fileID: 994289943}
+  - component: {fileID: 994289944}
   m_Layer: 0
   m_Name: "\u5DE8\u5927\u753B\u50CF_0"
   m_TagString: Untagged
@@ -12579,6 +12580,21 @@ MonoBehaviour:
   spRenderer: {fileID: 994289942}
   isShowing: 1
   curAlpha: 0
+--- !u!114 &994289944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 994289939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e60c7cfaee14e664fbf87c722c533be6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sender: {fileID: 0}
+  SaturationAction: 1
+  waveControl: {fileID: 0}
 --- !u!1 &997588126
 GameObject:
   m_ObjectHideFlags: 0
@@ -14032,6 +14048,25 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1141641712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141641683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c2c62c62f2b1e24d9ecc79bc7d33ae0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 0}
+  radius: 0
+  minRadius: 2
+  maxRadius: 2000
+  maxDuration: 3
+  radiusBreatheCoef: 0.65
+  radiusBreatheSpeed: 0.5
 --- !u!1001 &1146248733
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17345,6 +17380,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6861886614860916395, guid: 62f32f7d46aa7f64ea82d38e6e3a63ec, type: 3}
       insertIndex: 9
       addedObject: {fileID: 1141641702}
+    - targetCorrespondingSourceObject: {fileID: 6861886614860916395, guid: 62f32f7d46aa7f64ea82d38e6e3a63ec, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1141641712}
     - targetCorrespondingSourceObject: {fileID: 8446265199197236098, guid: 62f32f7d46aa7f64ea82d38e6e3a63ec, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1555017868}
