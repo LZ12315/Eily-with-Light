@@ -48,5 +48,6 @@ public class BlackBoid : MonoBehaviour
     void BlackBoidDied()
     {
         timelineManager.PlayTimeline(3);
+        timelineManager.pressKNote.SetActive(false);
     }
 }

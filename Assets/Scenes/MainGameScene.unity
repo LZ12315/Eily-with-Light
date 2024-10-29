@@ -145,7 +145,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6961281
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7564,6 +7564,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1323135057438520271, guid: 7fc77622abf7f1246b364b09e36ca930, type: 3}
+      propertyPath: audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 296c9dd867ab48e4fad96df86cc1b8ce, type: 3}
     - target: {fileID: 2293118746200462076, guid: 7fc77622abf7f1246b364b09e36ca930, type: 3}
       propertyPath: Loop
       value: 1
@@ -7575,7 +7579,7 @@ PrefabInstance:
     - target: {fileID: 2293118746200462076, guid: 7fc77622abf7f1246b364b09e36ca930, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 4a34bf1097d67134aaf10532992deaf9, type: 3}
+      objectReference: {fileID: 8300000, guid: 296c9dd867ab48e4fad96df86cc1b8ce, type: 3}
     - target: {fileID: 3018660838801930602, guid: 7fc77622abf7f1246b364b09e36ca930, type: 3}
       propertyPath: m_LocalPosition.x
       value: 86.43
@@ -10151,7 +10155,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.25576782, y: 0.9957242}
+  m_Offset: {x: -0.25576782, y: 0.91425824}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -10162,7 +10166,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.92157, y: 0.17756557}
+  m_Size: {x: 5.92157, y: 0.102366865}
   m_EdgeRadius: 0
 --- !u!114 &661414560
 MonoBehaviour:
@@ -18193,6 +18197,14 @@ PrefabInstance:
       propertyPath: BlackBoid
       value: 
       objectReference: {fileID: 406847231}
+    - target: {fileID: 1554495090387691854, guid: 62f32f7d46aa7f64ea82d38e6e3a63ec, type: 3}
+      propertyPath: BoidParent
+      value: 
+      objectReference: {fileID: 1141641720}
+    - target: {fileID: 1554495090387691854, guid: 62f32f7d46aa7f64ea82d38e6e3a63ec, type: 3}
+      propertyPath: pressKNote
+      value: 
+      objectReference: {fileID: 6961280}
     - target: {fileID: 1554495090387691854, guid: 62f32f7d46aa7f64ea82d38e6e3a63ec, type: 3}
       propertyPath: triggerObjs.Array.data[0]
       value: 

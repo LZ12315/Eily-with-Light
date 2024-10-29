@@ -16,11 +16,13 @@ public class TimelineManager : MonoBehaviour
     public GameObject BlackBoid;
     private CharCtrl CharCtrl;
     public BoidParent BoidParent;
+    public GameObject pressKNote;
 
     void Awake()
     {
         transform.position = new Vector3(75.53f, -12.2f, 0);
         BlackBoid.SetActive(false);
+        pressKNote.SetActive(false);
         for (int i = 0; i < triggerObjs.Length; i++)
         {
             triggerObjs[i].gameObject.SetActive(true);
@@ -57,6 +59,7 @@ public class TimelineManager : MonoBehaviour
     {
         BlackBoid.SetActive(true);
         isPlaying = true;
+        pressKNote.SetActive(true);
     }
 
     public void SmallBall() 
