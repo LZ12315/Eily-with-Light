@@ -20,12 +20,10 @@ public class EnddingScript : MonoBehaviour
         continueText.text = "to be continue";
         continueText.color = Color.white; // 确保Text颜色为白色 
         StartCoroutine(EndingFadeIn());
-
-       
     }
 
      IEnumerator  EndingFadeIn()
-    {
+     {
         blackoutImage.color = new Color(0, 0, 0, 0); // 重置Image颜色为透明  
         blackoutImage.gameObject.SetActive(true);
         continueText.gameObject.SetActive(true);
@@ -39,6 +37,7 @@ public class EnddingScript : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null; // 等待下一帧  
         }
-        blackoutImage.color = new Color(0, 0, 0, 1); 
+        blackoutImage.color = new Color(0, 0, 0, 1);
+        Application.Quit();
     }
 }
