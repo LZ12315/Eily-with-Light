@@ -207,7 +207,7 @@ public class LightingBoid : MonoBehaviour
 
     private bool InVisionCone(Vector2 targetPosition)
     {
-        Vector2 myDirection = initialDirection; // 这里假设物体的正上方是它的前方 之后会设定为跟随主角 需要修改
+        Vector2 myDirection = initialDirection;
         Vector2 toTarget = (targetPosition - (Vector2)transform.position).normalized;
 
         // 点积计算
