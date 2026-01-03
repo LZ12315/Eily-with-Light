@@ -51,7 +51,7 @@ public class LightingBoid : MonoBehaviour
     public float reBoundSpeed;
     public float reBoundTime;
     public float reBoundShrinkCoef = 0.8f;
-    public float cuvature = 1f;
+    public float curvature = 1f;
     public float percentSpeed = 0.00005f;
     public GameObject HitEffect;
     private bool isTracking;
@@ -429,7 +429,7 @@ public class LightingBoid : MonoBehaviour
         Vector3 middlePoint = Vector3.Lerp(p0, p2, 0.5f);
         Vector3 normal = Vector2.Perpendicular(p0 - p2).normalized;
         float randomDirection = Random.Range(-2f, 2f);
-        return middlePoint + (p2 - p0).magnitude * cuvature * randomDirection * normal;
+        return middlePoint + (p2 - p0).magnitude * curvature * randomDirection * normal;
     }
 
     private Vector2 Bezier(float t, Vector3 p0, Vector3 p1, Vector3 p2)
